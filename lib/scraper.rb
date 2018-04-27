@@ -7,11 +7,26 @@ page = agent.get("https://www.denvergov.org/content/denvergov/en/denver-developm
 a_tags = page.css('li a[adhocenable="false"]')
 
 links = a_tags.map do |item|
-  "https://www.denvergov.org" + item['href']
+  if item['href'].include?(' ')
+    new_href = item['href'].gsub!(' ', '%20')
+    "https://www.denvergov.org" + new_href
+  else
+    "https://www.denvergov.org" + item['href']
+  end
 end
 
-puts links
+def file_name_builder(link)
+  link.scan(/(20.*)/).flatten.fetch(0)
+end
 
-File.open('any_name_here.xls', 'wb') do |file|
- file << open('http://www.example.com/xls_file.xls').read
+def file_root
+  '/Users/meganarellano/turing/3module/projects/denver-building-permit-scraper/data/'
+end
+
+
+links.each do |link|
+  file_name = file_root + file_name_builder(link)
+  File.open(file_name, 'wb') do |file|
+    file << open(link).read
+  end
 end
