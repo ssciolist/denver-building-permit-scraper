@@ -7,3 +7,5 @@ end
 
 gem 'mechanize'
 gem 'pry'
+gem 'roo'
+gem 'roo-xls'
