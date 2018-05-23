@@ -1,6 +1,5 @@
 require 'roo'
 require 'roo-xls'
-require 'pry'
 
 class ExcelConverter
   def data_files
