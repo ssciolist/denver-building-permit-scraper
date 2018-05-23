@@ -1,6 +1,5 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require 'pry'
 require './lib/scraper.rb'
 
 class ScraperTest < Minitest::Test
