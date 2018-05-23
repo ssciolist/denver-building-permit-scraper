@@ -14,5 +14,4 @@ class ExcelConverterTest < Minitest::Test
   def test_it_returns_at_least_63_files
     assert @ec.data_files.count > 62
   end
-
 end

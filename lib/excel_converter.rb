@@ -1,9 +1,10 @@
 require 'roo'
 require 'roo-xls'
+require 'pry'
 
 class ExcelConverter
   def data_files
-    Dir.glob('/data/*/*')
+    Dir.glob('./data/*/*')
   end
 
   def csv_namer(file)
@@ -11,15 +12,18 @@ class ExcelConverter
   end
 
   def file_root
-    '/Users/meganarellano/turing/3module/projects/denver-building-permit-scraper/data/'
+    '/Users/meganarellano/turing/3module/projects/denver-building-permit-scraper/csv/'
   end
 
   def convert_to_csv
     data_files.each do |file|
       spreadsheet = Roo::Spreadsheet.open(file)
       csv = spreadsheet.sheet('Sheet1').to_csv
-      File.open("#{file_root}#{csv_namer(file)}", "w+") do |file|
-        file << CSV.read(csv)
+      file_name = file_root + csv_namer(file) + '.csv'
+      CSV.open(file_name, "wb") do |file|
+        CSV.parse(csv).each do |row|
+          file << row
+        end
       end
     end
   end
