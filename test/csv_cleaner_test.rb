@@ -12,8 +12,14 @@ class ExcelConverterTest < Minitest::Test
     assert_instance_of CsvCleaner, @cleaner
   end
 
-  def test_it_can_strip_rows
-    @cleaner.strip_empty_rows('/Users/meganarellano/turing/3module/projects/denver-building-permit-scraper/csv/April-2015_test.csv')
+  def test_it_cleans_all_files
+    assert_equal @cleaner.original_csv_files.count, Dir.glob('./cleaned/*').count
   end
+
+  # def test_it_can_find_stat_code
+  #   old = '/Users/meganarellano/turing/3module/projects/denver-building-permit-scraper/csv/April-2015_test.csv'
+  #   newer = '/Users/meganarellano/turing/3module/projects/denver-building-permit-scraper/csv/test_test.csv'
+  #   @cleaner.output_clean_csv(newer, old)
+  # end
 
 end
