@@ -1,6 +1,5 @@
 require 'roo'
 require 'roo-xls'
-require 'pry'
 
 class ExcelConverter
   def data_files
@@ -22,7 +21,7 @@ class ExcelConverter
       file_name = file_root + csv_namer(file) + '.csv'
       CSV.open(file_name, "wb") do |file|
         CSV.parse(csv).each do |row|
-          file << row
+          file << row unless row.all? { |data| data.nil? }
         end
       end
     end
