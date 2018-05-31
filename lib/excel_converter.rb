@@ -42,5 +42,3 @@ class ExcelConverter
 end
 
 ec = ExcelConverter.new
-
-ec.single_file_conversion("/Users/meganarellano/turing/3module/projects/denver-building-permit-scraper/data/2018/Permits-0521-0525.xls", "Permits-0521-0525")
