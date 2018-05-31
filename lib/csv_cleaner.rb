@@ -1,5 +1,5 @@
-require 'pry'
 require 'CSV'
+
 class CsvCleaner
   def original_csv_files
     Dir.glob('./csv/*')
@@ -50,4 +50,3 @@ class CsvCleaner
 end
 
 cleaner = CsvCleaner.new
-cleaner.batch_output
