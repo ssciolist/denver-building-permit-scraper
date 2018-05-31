@@ -27,8 +27,18 @@ class ExcelConverter
     end
   end
 
+  def single_file_conversion(source, destination)
+    spreadsheet = Roo::Spreadsheet.open(source)
+    csv = spreadsheet.sheet('Sheet1').to_csv
+    file_name = file_root + destination + '.csv'
+    CSV.open(file_name, "wb") do |file|
+      CSV.parse(csv).each do |row|
+        file << row unless row.all? { |data| data.nil? }
+      end
+    end
+
+  end
+
 end
 
 ec = ExcelConverter.new
-
-ec.convert_to_csv

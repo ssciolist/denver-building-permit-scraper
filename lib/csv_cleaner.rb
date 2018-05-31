@@ -1,5 +1,5 @@
-require 'pry'
 require 'CSV'
+
 class CsvCleaner
   def original_csv_files
     Dir.glob('./csv/*')
@@ -14,8 +14,8 @@ class CsvCleaner
   end
 
   def row_containing_permit?(row)
-    return false if row.first.nil?
-    row.first.match?(/\d{4}-\d{2}-\d{2}T/)
+    return false if row.first.nil? || row[3].nil?
+    row.first.match?(/\d{4}-\d{2}-\d{2}/)
   end
 
   def append_stat_code(file_name)
@@ -50,4 +50,3 @@ class CsvCleaner
 end
 
 cleaner = CsvCleaner.new
-cleaner.batch_output
