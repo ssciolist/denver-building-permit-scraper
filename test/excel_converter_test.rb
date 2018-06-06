@@ -14,4 +14,12 @@ class ExcelConverterTest < Minitest::Test
   def test_it_returns_at_least_63_files
     assert @ec.data_files.count > 62
   end
+
+  def test_it_can_name_a_file
+    last_file = @ec.data_files.first
+    file_name = @ec.csv_namer(last_file)
+
+    refute file_name.match?(/xls/)
+    refute file_name.match?(/data\//)
+  end
 end
