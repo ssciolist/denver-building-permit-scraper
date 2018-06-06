@@ -16,16 +16,11 @@ class ExcelConverter
 
   def convert_to_csv
     data_files.each do |file|
-      spreadsheet = Roo::Spreadsheet.open(file)
-      csv = spreadsheet.sheet('Sheet1').to_csv
-      file_name = file_root + csv_namer(file) + '.csv'
-      CSV.open(file_name, "wb") do |file|
-        CSV.parse(csv).each do |row|
-          file << row unless row.all? { |data| data.nil? }
-        end
-      end
+      permit_descriptor = csv_namer(file)
+      single_file_conversion(file, permit_descriptor)
     end
   end
+
 
   def single_file_conversion(source, destination)
     spreadsheet = Roo::Spreadsheet.open(source)
@@ -36,9 +31,5 @@ class ExcelConverter
         file << row unless row.all? { |data| data.nil? }
       end
     end
-
   end
-
 end
-
-ec = ExcelConverter.new
